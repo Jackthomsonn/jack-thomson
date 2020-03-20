@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Lato|Open+Sans:300,400,600,700&display=swap');
 
+:root {
+  --avatarUrl: '';
+}
+
 .container {
   display: flex;
   flex-flow: column wrap;
@@ -24,16 +28,22 @@
 
 .technologies {
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-evenly;
-  width: 30vw;
-  margin-top: 48px;
+  align-items: center;
+  width: 50vw;
+
+  & > svg {
+    margin-top: 48px;
+    margin-right: 12px;
+  }
 }
 
 .profile-photo {
   border-radius: 100%;
   width: 100px;
   height: 100px;
-  background: url(../../../assets/profile.jpg);
+  background: var(--avatarUrl);
   background-size: cover;
   margin-bottom: 8px;
 }
@@ -42,84 +52,12 @@
   margin-top: 24px;
 }
 
-.card {
-  background: #FFF;
-  box-shadow: 1px 1px 20px #EEE;
-  height: 200px;
-  width: 50vw;
-  border-radius: 12px;
-  display: flex;
-  flex-flow: row wrap;
-
-  &__image {
-    border-right: 1px solid #EEE;
-    flex: 1;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top-left-radius: 12px;
-    border-bottom-left-radius: 12px;
-
-    img {
-      width: 300px;
-      height: auto;
-    }
-  }
-
-  &__body {
-    padding: 16px;
-    flex: 3;
-  }
-}
-
-h2 {
-  font-family: 'Lato', sans-serif;
-  font-weight: 400;
-}
-
-strong {
-  font-weight: 700;
-  font-family: 'Open Sans', sans-serif;
-  color: #79ABB4;
-}
-
-p {
-  font-size: 0.85rem;
-  font-weight: 500;
-  font-family: 'Open Sans', sans-serif;
-  color: #352D39;
-}
-
-button {
-  border: 1px solid #EEE;
-  box-shadow: 1px 1px 20px #EEE;
-  background: #FFF;
-  color: #79ABB4;
-  font-weight: 700;
-  border-radius: 24px;
-  padding-right: 40px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  outline: none;
-  cursor: pointer;
-  padding: 8px;
-  width: 130px;
-}
-
-@media screen and (max-width: 970px) {
+@media screen and (max-width: 1024px) {
   .top {
-    height: 40vh;
+    height: 50vh;
   }
 
-  .card {
-    flex-flow: column nowrap;
-    height: 100%;
-    width: 90vw;
-
-    &__image {
-      border-right: 1px solid transparent;
-    }
+  .technologies {
+    width: 60vw;
   }
 }
