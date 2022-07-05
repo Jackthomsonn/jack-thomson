@@ -6,6 +6,7 @@ import * as GitHub from 'github-api';
   styleUrls: ['home.component.scss'],
   templateUrl: 'home.component.html'
 })
+
 export class HomePageComponent implements OnInit {
   private setAvatar(url: string) {
     document.documentElement.style
