@@ -71,8 +71,8 @@ button > svg {
 .profile-photo {
   border-radius: 100%;
   border: 8px solid #eff8f0;
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
   background: var(--avatarUrl);
   background-size: cover;
 }
