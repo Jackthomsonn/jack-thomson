@@ -6,6 +6,19 @@ a {
   text-decoration: none;
 }
 
+.link-container {
+  margin-top: 32px;
+}
+
+.a-link {
+  background-color: #444;
+  color: #fff;
+  padding: 12px;
+  border-radius: 22px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 button {
   border: none;
   font-weight: 700;
