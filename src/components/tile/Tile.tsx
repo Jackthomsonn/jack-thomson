@@ -15,7 +15,7 @@ export const Tile = ({ type, title }: TileProps) => {
   const isDev = process.env.NODE_ENV === "development";
   const { data } = useSWR<HomeTotalsResponse>(
     isDev
-      ? "https://europe-west1-home-monitor-373013.cloudfunctions.net/GetTotalsForHome"
+      ? "http://localhost:8080/getTotalsForHome"
       : "https://europe-west1-home-monitor-373013.cloudfunctions.net/GetTotalsForHome"
   );
 
