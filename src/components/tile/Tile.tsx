@@ -1,6 +1,4 @@
-import { Suspense } from "react";
 import useSWR from "swr";
-import { Spinner } from "../spinner/Spinner";
 import "./Tile.css";
 
 type HomeTotalsResponse = {
