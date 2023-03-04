@@ -1,0 +1,16 @@
+.profile-photo {
+  border-radius: 100%;
+  width: 200px;
+  height: 200px;
+  background: var(--avatarUrl);
+  background-size: cover;
+}
+
+p {
+}
+
+@media screen and (min-width: 768px) {
+  p {
+    width: 50vw;
+  }
+}

@@ -1,0 +1,39 @@
+.button-container {
+  display: flex;
+  margin: 24px 0 0 0;
+}
+
+.button-container > a {
+  margin: 0 4px;
+}
+
+button {
+  border: none;
+  font-weight: 700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  outline: none;
+  cursor: pointer;
+  padding: 8px;
+  text-decoration: none;
+}
+
+button.github {
+  background: #f2f0f6;
+  color: #6e5494;
+}
+
+button.shell-ai {
+  background: #ddc9e3;
+  color: #955ca6;
+}
+
+button.linkedin {
+  background: #b5e7fe;
+  color: #0077b5;
+}
+
+button > svg {
+  margin-right: 12px;
+}

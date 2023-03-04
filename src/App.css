@@ -2,54 +2,6 @@
   --avatarUrl: "";
 }
 
-a {
-  text-decoration: none;
-}
-
-.link-container {
-  margin-top: 32px;
-}
-
-.a-link {
-  background-color: #444;
-  color: #fff;
-  padding: 12px;
-  border-radius: 22px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-button {
-  border: none;
-  font-weight: 700;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  outline: none;
-  cursor: pointer;
-  padding: 8px;
-  text-decoration: none;
-}
-
-button.github {
-  background: #f2f0f6;
-  color: #6e5494;
-}
-
-button.shell-ai {
-  background: #ddc9e3;
-  color: #955ca6;
-}
-
-button.linkedin {
-  background: #b5e7fe;
-  color: #0077b5;
-}
-
-button > svg {
-  margin-right: 12px;
-}
-
 .container {
   display: flex;
   flex-flow: column wrap;
@@ -58,48 +10,25 @@ button > svg {
   padding: 0 12px;
 }
 
-.top {
+.container__inner {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
 }
 
-.top > h2 {
-  color: #47a248;
+.container__inner > h2 {
+  color: #06d6a0;
   font-weight: 500;
   font-size: 24px;
   margin-top: 24px;
 }
 
-.top > p {
+.container__inner > p {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 24px;
-  color: #352d39;
+  color: #f2f0f6;
   margin-top: 12px;
   text-align: center;
-}
-
-.top > p > a {
-  color: #fa4616;
-  font-weight: 700;
-}
-
-.profile-photo {
-  border-radius: 100%;
-  border: 8px solid #eff8f0;
-  width: 200px;
-  height: 200px;
-  background: var(--avatarUrl);
-  background-size: cover;
-}
-
-.button-container {
-  display: flex;
-  margin: 24px 0 0 0;
-}
-
-.button-container > a {
-  margin: 0 4px;
 }
