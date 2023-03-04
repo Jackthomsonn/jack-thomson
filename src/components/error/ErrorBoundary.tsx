@@ -23,8 +23,9 @@ export class ErrorBoundary extends React.Component<any, any> {
             borderRadius: 12,
             padding: 12,
             color: "#22223b",
-            fontWeight: "500",
+            fontWeight: "700",
             marginTop: 12,
+            textAlign: "center",
           }}
         >
           Something went wrong. Please try again later
