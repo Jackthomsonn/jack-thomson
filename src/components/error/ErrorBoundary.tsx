@@ -6,12 +6,8 @@ export class ErrorBoundary extends React.Component<any, any> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
-  }
-
-  componentDidCatch(error: any, errorInfo: any) {
-    console.log(error, errorInfo);
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
   }
 
   render() {
@@ -28,7 +24,7 @@ export class ErrorBoundary extends React.Component<any, any> {
             textAlign: "center",
           }}
         >
-          Something went wrong. Please try again later
+          {this.state.error.message}
         </div>
       );
     }
