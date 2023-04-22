@@ -5,6 +5,7 @@ import "./App.css";
 import { HomeTotals } from "./components/homeTotals/HomeTotals";
 import { Profile } from "./components/profile/Profile";
 import { Social } from "./components/social/Social";
+import { inject } from '@vercel/analytics';
 
 function App() {
   const SWRConfigOptions: SWRConfiguration = {
@@ -18,6 +19,8 @@ function App() {
       }),
     suspense: true,
   };
+
+  inject();
 
   return (
     <>
