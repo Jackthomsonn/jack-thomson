@@ -7,58 +7,61 @@ settings:
 overrides:
   nth-check@<2.0.1: '>=2.0.1'
 
-dependencies:
-  '@testing-library/jest-dom':
-    specifier: ^5.16.4
-    version: 5.16.5
-  '@testing-library/react':
-    specifier: ^14.0.0
-    version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
-  '@testing-library/user-event':
-    specifier: ^14.4.3
-    version: 14.4.3(@testing-library/dom@9.3.0)
-  '@types/jest':
-    specifier: ^29.5.1
-    version: 29.5.2
-  '@types/node':
-    specifier: ^20.1.7
-    version: 20.2.5
-  '@types/react':
-    specifier: ^18.2.18
-    version: 18.2.18
-  '@types/react-dom':
-    specifier: ^18.0.6
-    version: 18.0.11
-  '@vercel/analytics':
-    specifier: ^1.0.0
-    version: 1.0.0(react@18.2.0)
-  github-api:
-    specifier: ^3.4.0
-    version: 3.4.0
-  react:
-    specifier: ^18.2.0
-    version: 18.2.0
-  react-confetti:
-    specifier: ^6.1.0
-    version: 6.1.0(react@18.2.0)
-  react-dom:
-    specifier: ^18.2.0
-    version: 18.2.0(react@18.2.0)
-  react-scripts:
-    specifier: 5.0.1
-    version: 5.0.1(@babel/plugin-syntax-flow@7.18.6)(@babel/plugin-transform-react-jsx@7.21.0)(eslint@8.35.0)(react@18.2.0)(typescript@5.1.3)
-  react-use:
-    specifier: ^17.4.0
-    version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
-  swr:
-    specifier: ^2.0.4
-    version: 2.0.4(react@18.2.0)
-  typescript:
-    specifier: ^5.0.4
-    version: 5.1.3
-  web-vitals:
-    specifier: ^3.4.0
-    version: 3.4.0
+importers:
+
+  .:
+    dependencies:
+      '@testing-library/jest-dom':
+        specifier: ^5.16.4
+        version: 5.16.5
+      '@testing-library/react':
+        specifier: ^14.0.0
+        version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@testing-library/user-event':
+        specifier: ^14.4.3
+        version: 14.4.3(@testing-library/dom@9.3.0)
+      '@types/jest':
+        specifier: ^29.5.1
+        version: 29.5.2
+      '@types/node':
+        specifier: ^20.1.7
+        version: 20.2.5
+      '@types/react':
+        specifier: ^18.2.18
+        version: 18.2.18
+      '@types/react-dom':
+        specifier: ^18.0.6
+        version: 18.0.11
+      '@vercel/analytics':
+        specifier: ^1.0.0
+        version: 1.0.0(react@18.2.0)
+      github-api:
+        specifier: ^3.4.0
+        version: 3.4.0
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-confetti:
+        specifier: ^6.1.0
+        version: 6.1.0(react@18.2.0)
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-scripts:
+        specifier: 5.0.1
+        version: 5.0.1(@babel/plugin-syntax-flow@7.18.6)(@babel/plugin-transform-react-jsx@7.21.0)(eslint@8.35.0)(react@18.2.0)(typescript@5.1.3)
+      react-use:
+        specifier: ^17.4.0
+        version: 17.4.0(react-dom@18.2.0)(react@18.2.0)
+      swr:
+        specifier: ^2.0.4
+        version: 2.0.4(react@18.2.0)
+      typescript:
+        specifier: ^5.0.4
+        version: 5.1.3
+      web-vitals:
+        specifier: ^3.4.0
+        version: 3.4.0
 
 packages:
 
@@ -7270,7 +7273,7 @@ packages:
       levn: 0.3.0
       prelude-ls: 1.1.2
       type-check: 0.3.2
-      word-wrap: 1.2.3
+      word-wrap: 1.2.5
     dev: false
 
   /optionator@0.9.1:
@@ -7282,7 +7285,7 @@ packages:
       levn: 0.4.1
       prelude-ls: 1.2.1
       type-check: 0.4.0
-      word-wrap: 1.2.3
+      word-wrap: 1.2.5
     dev: false
 
   /p-limit@2.3.0:
@@ -10173,8 +10176,8 @@ packages:
       isexe: 2.0.0
     dev: false
 
-  /word-wrap@1.2.3:
-    resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
+  /word-wrap@1.2.5:
+    resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
     dev: false
 
