@@ -1,10 +1,9 @@
 .button-container {
   display: flex;
-  margin: 24px 0 0 0;
-}
-
-.button-container > a {
-  margin: 0 4px;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
 }
 
 button {
@@ -18,7 +17,6 @@ button {
   cursor: pointer;
   padding: 12px 18px;
   text-decoration: none;
-  margin-right: 12px;
 }
 
 button.github {
@@ -34,6 +32,16 @@ button.shell-ai {
 button.linkedin {
   background: #b5e7fe;
   color: #0077b5;
+}
+
+button.shellai {
+  background: #10172A;
+  color: #FFF;
+}
+
+button.passionfruit {
+  background: #FFF;
+  color: #10172A;
 }
 
 button > svg {
