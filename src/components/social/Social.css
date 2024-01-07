@@ -40,8 +40,18 @@ button.shellai {
 }
 
 button.passionfruit {
-  background: #FFF;
-  color: #10172A;
+  background: #FEEF89;
+  color: #22223B;
+}
+
+button.glyphgenie {
+  background: #5B21B6;
+  color: #FFF;
+}
+
+button.glyphgenie > img {
+  border-radius: 100%;
+  margin-right: 12px;
 }
 
 button > svg {
