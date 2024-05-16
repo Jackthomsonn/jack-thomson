@@ -36,6 +36,12 @@ export const Profile = () => {
           Sero.
         </a>{" "}
       </p>
+
+      <div className="my-three-step-process">
+        <span>1. Understand the problem at hand</span>
+        <span>2. Craft a solution that addresses it effectively</span>
+        <span>3. Refine and iterate</span>
+      </div>
     </>
   );
 };
