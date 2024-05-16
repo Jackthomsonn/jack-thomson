@@ -20,8 +20,8 @@ button {
 }
 
 button.github {
-  background: #f2f0f6;
-  color: #6e5494;
+  background: #6e5494;
+  color: #f1eef4;
 }
 
 button.shell-ai {
@@ -40,13 +40,13 @@ button.shellai {
 }
 
 button.passionfruit {
-  background: #10172A;
-  color: #FFF;
+  background: #8B5CF6;
+  color: #f3effe;
 }
 
 button.glyphgenie {
   background: #5B21B6;
-  color: #FFF;
+  color: #efe9f8;
 }
 
 button.glyphgenie > img {

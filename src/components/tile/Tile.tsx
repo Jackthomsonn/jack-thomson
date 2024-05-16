@@ -25,7 +25,7 @@ export const Tile = ({ type, title }: TileProps) => {
         <div className={`tile_container__tile-${type}`}>
           <div className="tile_container__tile__title">{title}</div>
 
-          <div className="tile_container__tile__value">{data?.[type]}</div>
+          <div className="tile_container__tile__value">{type === 'carbonTotal' ? '🚀' : '⚡'} {data?.[type]}</div>
         </div>
       </div>
     </>

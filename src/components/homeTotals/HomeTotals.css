@@ -5,6 +5,12 @@ p {
   font-weight: 500;
 }
 
+a.home-monitor {
+  text-decoration: none;
+  color: #8B5CF6;
+  font-weight: 700;
+}
+
 .home_totals_container {
   display: flex;
   flex-wrap: wrap;

@@ -8,7 +8,7 @@
 
 p {
   text-align: center;
-  color: #fff;
+  color: #22223b;
   margin-top: 24px;
   font-weight: 500;
   font-size: 18px;
@@ -16,7 +16,11 @@ p {
 }
 
 h2 {
-  color: #06d6a0;
+  background-color: #06d6a0;
+  padding: 8px;
+  border-radius: 4px;
+  transform: rotate(-4deg);
+  color: #FFF;
   font-weight: 700;
   font-size: 32px;
   margin-top: 24px;
@@ -25,7 +29,7 @@ h2 {
 @media screen and (min-width: 768px) {
   p {
     text-align: center;
-    color: #fff;
+    color: #22223b;
     margin-top: 24px;
     width: 70vw;
   }

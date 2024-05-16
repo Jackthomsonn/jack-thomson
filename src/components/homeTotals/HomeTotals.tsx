@@ -10,7 +10,7 @@ export const HomeTotals = () => {
       <p>
         The below tiles represent the energy consumption and carbon emissions
         for my home over the last day. These values are provided by my personal
-        project Home Monitor which you can find on GitHub.
+        project <a href="https://github.com/Jackthomsonn/home_monitor" target="_blank" rel="noreferrer" className="home-monitor">Home Monitor</a> which you can find on GitHub.
       </p>
       <div className="home_totals_container">
         <ErrorBoundary>
