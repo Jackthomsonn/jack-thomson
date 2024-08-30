@@ -32,8 +32,8 @@ export const Profile = () => {
       <h2>Jack Thomson</h2>
       <p>
         Currently working as a Lead software engineer at{" "}
-        <a href="https://sero.life/" target="_blank" rel="noreferrer">
-          Sero.
+        <a href="https://www.aico.co.uk/homelink/" target="_blank" rel="noreferrer">
+          Aico HomeLink.
         </a>{" "}
       </p>
 
