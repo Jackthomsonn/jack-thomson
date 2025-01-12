@@ -31,17 +31,11 @@ export const Profile = () => {
       <div className="profile-photo"></div>
       <h2>Jack Thomson</h2>
       <p>
-        Currently working as a Lead software engineer at{" "}
-        <a href="https://www.aico.co.uk/homelink/" target="_blank" rel="noreferrer">
-          Aico HomeLink.
+        Currently working as a Staff Software Engineer at{" "}
+        <a href="https://equalsmoney.com/" target="_blank" rel="noreferrer">
+          Equals <span style={{ color: '#1D1F26' }}>Money</span>.
         </a>{" "}
       </p>
-
-      {/* <div className="my-three-step-process">
-        <span>1. Understand the problem at hand</span>
-        <span>2. Craft a solution that addresses it effectively</span>
-        <span>3. Refine and iterate</span>
-      </div> */}
     </>
   );
 };
