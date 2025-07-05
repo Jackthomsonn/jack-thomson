@@ -4,52 +4,57 @@
   justify-content: center;
   align-items: center;
   gap: 24px;
+  margin-top: 24px;
 }
 
 button {
   border: none;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 24px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   outline: none;
   cursor: pointer;
-  padding: 12px 18px;
+  justify-content: space-between;
+  padding: 18px;
+  text-align: left;
   text-decoration: none;
+  width: 160px;
+  height: 160px;
 }
 
 button.github {
   background: #6e5494;
   color: #f1eef4;
+  background-image: url("../../../public/grid.svg");
 }
 
 button.shell-ai {
   background: #ddc9e3;
   color: #955ca6;
+  background-image: url("../../../public/grid.svg");
 }
 
 button.linkedin {
   background: #b5e7fe;
   color: #0077b5;
-}
-
-button.shellai {
-  background: #10172A;
-  color: #FFF;
+  background-image: url("../../../public/grid.svg");
 }
 
 button.passionfruit {
   background: #8B5CF6;
   color: #f3effe;
+  background-image: url("../../../public/grid.svg");
 }
 
-button.glyphgenie {
-  background: #5B21B6;
-  color: #efe9f8;
+button.eyrie {
+  background: #f98b3a;
+  color: #FFF;
+  background-image: url("../../../public/grid.svg");
 }
 
-button.glyphgenie > img {
+button.eyrie > img {
   border-radius: 100%;
   margin-right: 12px;
 }

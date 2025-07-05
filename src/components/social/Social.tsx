@@ -25,7 +25,7 @@ export const Social = () => {
                 fill="#f2f0f6"
               />
             </svg>
-            Github
+            <span>Github</span>
           </button>
         </a>
         <a
@@ -74,13 +74,13 @@ export const Social = () => {
           </button>
         </a>
         <a
-          href="https://glyphgenie.app"
+          href="https://eyrie.app"
           target="_blank"
           rel="noreferrer"
         >
-          <button className="glyphgenie">
-            <img src="/glyph-genie.png" alt="Glyph Genie" width={20} height={20} />
-            GlyphGenie
+          <button className="eyrie">
+            <img src="/eyrie.svg" alt="Glyph Genie" width={20} height={20} />
+            Eyrie
           </button>
         </a>
       </div>

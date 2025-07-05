@@ -1,5 +1,5 @@
 .profile-photo {
-  border-radius: 100%;
+  border-radius: 20%;
   min-width: 200px;
   min-height: 200px;
   background: var(--avatarUrl);
@@ -8,7 +8,7 @@
 
 p {
   text-align: center;
-  color: #22223b;
+  color: #FFF;
   margin-top: 24px;
   font-weight: 500;
   font-size: 18px;
@@ -16,38 +16,20 @@ p {
 }
 
 h2 {
-  background-color: #06d6a0;
-  padding: 8px;
-  border-radius: 4px;
+  background-color: #FFF;
+  padding: 14px;
+  border-radius: 12px;
   transform: rotate(-4deg);
-  color: #FFF;
+  color: #212529;
   font-weight: 700;
   font-size: 32px;
   margin-top: 24px;
 }
 
-.my-three-step-process {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 24px;
-}
-
-.my-three-step-process > span {
-  background-color: #8B5CF6;
-  color: #FFF;
-  padding: 8px 16px;
-  border-radius: 4px;
-  margin: 8px;
-  font-weight: 500;
-  font-size: 16px;
-
-}
-
 @media screen and (min-width: 768px) {
   p {
     text-align: center;
-    color: #22223b;
+    color: #FFF;
     margin-top: 24px;
     width: 70vw;
   }

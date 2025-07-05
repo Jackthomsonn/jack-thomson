@@ -31,9 +31,10 @@ export const Profile = () => {
       <div className="profile-photo"></div>
       <h2>Jack Thomson</h2>
       <p>
-        Currently working as a Staff Software Engineer at{" "}
+        Staff Software Engineer focused on aligning technical solutions with business goals. Experienced in cloud, DevOps, and modern full-stack development.
+        Currently working at{" "}
         <a href="https://equalsmoney.com/" target="_blank" rel="noreferrer">
-          Equals <span style={{ color: '#1D1F26' }}>Money</span>.
+          Equals Money
         </a>{" "}
       </p>
     </>

@@ -8,7 +8,8 @@
 }
 
 body {
-  background: #F7FAFC;
+  background-image: url("../public/grid.svg"), linear-gradient(180deg,#212529, #000);
+  height: 100vh;
 }
 
 a {
