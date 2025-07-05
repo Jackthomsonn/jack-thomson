@@ -1,37 +1,40 @@
-import * as GitHub from "github-api";
-import { useMemo } from "react";
+import GitHub from "github-api";
+import { useEffect, useState } from "react";
 import "./Profile.css";
 
-type GithubResponse = {
-  avatar_url: string;
-};
+const github = new GitHub();
 
 const attachProfilePhoto = (avatarUrl: string) => {
-  document.documentElement.style.setProperty(
-    "--avatarUrl",
-    `url(${avatarUrl})`
-  );
-};
-
-const handleProfileResponse = (err: Error, { avatar_url }: GithubResponse) => {
-  if (err) return;
-
-  attachProfilePhoto(avatar_url);
+  document.documentElement.style.setProperty("--avatarUrl", `url(${avatarUrl})`);
 };
 
 export const Profile = () => {
-  const getGithubProfile = () => {
-    new GitHub().getUser("jackthomsonn").getProfile(handleProfileResponse);
-  };
+  const [bio, setBio] = useState("");
+  useEffect(() => {
+    const getGithubProfile = async () => {
+      try {
+        const user = github.getUser("jackthomsonn");
+        const { data } = await user.getProfile();
+        if (data?.avatar_url) {
+          attachProfilePhoto(data.avatar_url);
+        }
+        if (data?.bio) {
+          setBio(data.bio);
+        }
+      } catch (error) {
+        console.error("Error fetching GitHub profile:", error);
+      }
+    };
 
-  useMemo(() => getGithubProfile(), []);
+    getGithubProfile();
+  }, []);
 
   return (
     <>
       <div className="profile-photo"></div>
       <h2>Jack Thomson</h2>
       <p>
-        Staff Software Engineer focused on aligning technical solutions with business goals. Experienced in cloud, DevOps, and modern full-stack development.
+        {bio}{" "}
         Currently working at{" "}
         <a href="https://equalsmoney.com/" target="_blank" rel="noreferrer">
           Equals Money
