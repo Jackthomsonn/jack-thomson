@@ -38,7 +38,7 @@ export const Profile = () => {
         Currently working at{" "}
         <a href="https://equalsmoney.com/" target="_blank" rel="noreferrer">
           Equals Money
-        </a>{" "}
+        </a> as a Staff Software Engineer
       </p>
     </>
   );
