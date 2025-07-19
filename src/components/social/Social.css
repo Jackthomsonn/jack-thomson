@@ -59,6 +59,17 @@ button.eyrie > img {
   margin-right: 12px;
 }
 
+button.enql {
+  background: #FF4AD2;
+  color: #FFF;
+  background-image: url("../../../public/grid.svg");
+}
+
+button.enql > img {
+  border-radius: 100%;
+  margin-right: 12px;
+}
+
 button > svg {
   margin-right: 12px;
 }
