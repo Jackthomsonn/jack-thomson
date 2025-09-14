@@ -20,8 +20,8 @@ button {
   padding: 18px;
   text-align: left;
   text-decoration: none;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
 }
 
 button.github {
@@ -60,7 +60,7 @@ button.eyrie > img {
 }
 
 button.enql {
-  background: #FF4AD2;
+  background: #191D25;
   color: #FFF;
   background-image: url("../../../public/grid.svg");
 }
