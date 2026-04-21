@@ -24,10 +24,10 @@
 
 .profile-bio {
   font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.45);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
   line-height: 1.9;
-  max-width: 380px;
+  max-width: 420px;
   text-align: center;
   letter-spacing: 0.04em;
 }

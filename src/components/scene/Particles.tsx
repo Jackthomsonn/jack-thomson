@@ -3,6 +3,9 @@ import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
 const PARTICLE_COUNT = 3000
+const MOUSE_STRENGTH = 12
+const SMOOTHING = 0.08
+
 export const DEPTH = 300.0
 export const BASE_SPEED = 12.0
 
@@ -29,13 +32,15 @@ const vertexShader = `
     float depth = (z + ${DEPTH}.0) / ${DEPTH}.0;
     vDepth = depth;
 
-    float warp = depth * depth * 0.2;
+    float warp = depth * depth * 0.1;
     pos.x *= 1.0 + warp;
     pos.y *= 1.0 + warp;
 
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
 
-    vAlpha = smoothstep(0.0, 0.2, depth) * (0.4 + depth * 0.6);
+    float fadeIn  = smoothstep(0.0, 0.15, depth);
+    float fadeOut = 1.0 - smoothstep(0.75, 1.0, depth);
+    vAlpha = fadeIn * fadeOut;
 
     float sizeBoost = 1.0 + depth * 1.8;
     gl_PointSize = aSize * (300.0 / -mvPosition.z) * sizeBoost;
@@ -64,27 +69,40 @@ const fragmentShader = `
 `
 
 export const Particles = () => {
-  const pointsRef   = useRef<THREE.Points<any, any>>(null!)
+  const pointsRef = useRef<THREE.Points<any, any>>(null!)
   const materialRef = useRef<THREE.ShaderMaterial>(null!)
   const geometryRef = useRef<THREE.BufferGeometry<any>>(null!)
-  const { camera, mouse } = useThree()
+  const { camera } = useThree()
+
+  // ✅ GLOBAL MOUSE (fixes your issue)
+  const mouseRef = useRef({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current.x = (e.clientX / window.innerWidth) * 2 - 1
+      mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
 
   const { positions, sizes, colors, speeds } = useMemo(() => {
     const positions = new Float32Array(PARTICLE_COUNT * 3)
-    const sizes     = new Float32Array(PARTICLE_COUNT)
-    const colors    = new Float32Array(PARTICLE_COUNT * 3)
-    const speeds    = new Float32Array(PARTICLE_COUNT)
+    const sizes = new Float32Array(PARTICLE_COUNT)
+    const colors = new Float32Array(PARTICLE_COUNT * 3)
+    const speeds = new Float32Array(PARTICLE_COUNT)
 
-    const dimStar  = new THREE.Color('#0d1a2e')
-    const white    = new THREE.Color('#c8dcff')
-    const yellow   = new THREE.Color('#FFD200')
-    const cyan     = new THREE.Color('#22d3ee')
+    const dimStar = new THREE.Color('#0d1a2e')
+    const white = new THREE.Color('#c8dcff')
+    const yellow = new THREE.Color('#FFD200')
+    const cyan = new THREE.Color('#22d3ee')
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const angle  = Math.random() * Math.PI * 2
-      const radius = Math.pow(Math.random(), 2.5) * 18
+      const angle = Math.random() * Math.PI * 2
+      const radius = Math.sqrt(Math.random()) * 18
 
-      positions[i * 3]     = Math.cos(angle) * radius
+      positions[i * 3] = Math.cos(angle) * radius
       positions[i * 3 + 1] = Math.sin(angle) * radius
       positions[i * 3 + 2] = -(Math.random() * DEPTH)
 
@@ -119,22 +137,25 @@ export const Particles = () => {
     const geo = geometryRef.current
     if (!geo) return
     geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-    geo.setAttribute('aSize',    new THREE.BufferAttribute(sizes,     1))
-    geo.setAttribute('aColor',   new THREE.BufferAttribute(colors,    3))
-    geo.setAttribute('aSpeed',   new THREE.BufferAttribute(speeds,    1))
+    geo.setAttribute('aSize', new THREE.BufferAttribute(sizes, 1))
+    geo.setAttribute('aColor', new THREE.BufferAttribute(colors, 3))
+    geo.setAttribute('aSpeed', new THREE.BufferAttribute(speeds, 1))
   }, [positions, sizes, colors, speeds])
 
   const uniformsRef = useRef({
-    uTime:      { value: 0 },
+    uTime: { value: 0 },
     uBaseSpeed: { value: BASE_SPEED },
   })
 
   useFrame((_, delta) => {
     uniformsRef.current.uTime.value += delta
 
-    camera.position.x += (mouse.x * 3 - camera.position.x) * 0.03
-    camera.position.y += (mouse.y * 2 - camera.position.y) * 0.03
-    camera.lookAt(0, 0, -20)
+    const m = mouseRef.current
+
+    camera.position.x += (m.x * MOUSE_STRENGTH - camera.position.x) * SMOOTHING
+    camera.position.y += (m.y * MOUSE_STRENGTH - camera.position.y) * SMOOTHING
+
+    camera.lookAt(m.x * 2, m.y * 1.5, -20)
   })
 
   return (
