@@ -2,11 +2,11 @@ import { useRef, useMemo, useEffect } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 
-const PARTICLE_COUNT = 3000
-const MOUSE_STRENGTH = 12
+const PARTICLE_COUNT = 5_000
+const MOUSE_STRENGTH = 15
 const SMOOTHING = 0.08
 
-export const DEPTH = 300.0
+export const DEPTH = 200.0
 export const BASE_SPEED = 12.0
 
 const vertexShader = `
@@ -32,7 +32,7 @@ const vertexShader = `
     float depth = (z + ${DEPTH}.0) / ${DEPTH}.0;
     vDepth = depth;
 
-    float warp = depth * depth * 0.1;
+    float warp = depth * depth * 9.0;
     pos.x *= 1.0 + warp;
     pos.y *= 1.0 + warp;
 
@@ -74,7 +74,6 @@ export const Particles = () => {
   const geometryRef = useRef<THREE.BufferGeometry<any>>(null!)
   const { camera } = useThree()
 
-  // ✅ GLOBAL MOUSE (fixes your issue)
   const mouseRef = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
