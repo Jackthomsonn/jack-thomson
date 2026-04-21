@@ -1,0 +1,63 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+  animation: overlayReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes overlayReveal {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.overlay__mute {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  padding: 8px 14px;
+  cursor: pointer;
+  pointer-events: auto;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  backdrop-filter: blur(6px);
+  border-radius: 2px;
+}
+
+.overlay__mute:hover {
+  color: #FFD200;
+  border-color: rgba(255, 210, 0, 0.35);
+  background: rgba(255, 210, 0, 0.04);
+}
+
+.overlay__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  pointer-events: auto;
+  padding: 0 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .overlay__content {
+    gap: 20px;
+  }
+}

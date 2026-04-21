@@ -15,30 +15,26 @@ export const Profile = () => {
       try {
         const user = github.getUser("jackthomsonn");
         const { data } = await user.getProfile();
-        if (data?.avatar_url) {
-          attachProfilePhoto(data.avatar_url);
-        }
-        if (data?.bio) {
-          setBio(data.bio);
-        }
+        if (data?.avatar_url) attachProfilePhoto(data.avatar_url);
+        if (data?.bio) setBio(data.bio);
       } catch (error) {
         console.error("Error fetching GitHub profile:", error);
       }
     };
-
     getGithubProfile();
   }, []);
 
   return (
     <>
-      <div className="profile-photo"></div>
-      <h2>Jack Thomson</h2>
-      <p>
+      <div className="profile-photo" />
+      <h2 className="profile-name">Jack Thomson</h2>
+      <p className="profile-bio">
         {bio}{" "}
         Currently working at{" "}
         <a href="https://equalsmoney.com/" target="_blank" rel="noreferrer">
           Equals Money
-        </a> as a Staff Software Engineer
+        </a>{" "}
+        as a Staff Software Engineer
       </p>
     </>
   );

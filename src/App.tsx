@@ -1,39 +1,45 @@
-import { inject } from '@vercel/analytics';
-import Confetti from "react-confetti";
-import useWindowSize from "react-use/lib/useWindowSize";
-import { SWRConfig, SWRConfiguration } from "swr";
-import "./App.css";
-import { Profile } from "./components/profile/Profile";
-import { Social } from "./components/social/Social";
+import { inject } from '@vercel/analytics'
+import { useState, useCallback, useEffect } from 'react'
+import { SWRConfig, SWRConfiguration } from 'swr'
+import './App.css'
+import { EnterScreen } from './components/enter/EnterScreen'
+import { Scene } from './components/scene/Scene'
+import { Overlay } from './components/overlay/Overlay'
+import { useAudio } from './hooks/useAudio'
+
+const swrConfig: SWRConfiguration = {
+  fetcher: (url: string) =>
+    fetch(url).then(async (r) => {
+      if (r.status === 200) return r.json()
+      const { message } = await r.json()
+      throw new Error(message)
+    }),
+  suspense: true,
+}
 
 function App() {
-  const SWRConfigOptions: SWRConfiguration = {
-    fetcher: (url: string) =>
-      fetch(url).then(async (r) => {
-        if (r.status === 200) {
-          return r.json();
-        }
-        const { message } = await r.json();
-        throw new Error(message);
-      }),
-    suspense: true,
-  };
+  useEffect(() => { inject() }, [])
 
-  inject();
+  const [entered, setEntered] = useState(false)
+  const { start, toggleMute, isMuted, playHoverSound } = useAudio()
+
+  const handleEnter = useCallback(() => {
+    start()
+    setEntered(true)
+  }, [start])
 
   return (
     <>
-      <Confetti {...useWindowSize()} recycle={false} />
-      <div className="container">
-        <div className="container__inner">
-          <SWRConfig value={SWRConfigOptions}>
-            <Profile />
-            <Social />
-          </SWRConfig>
-        </div>
-      </div>
+      <Scene />
+      {entered ? (
+        <SWRConfig value={swrConfig}>
+          <Overlay isMuted={isMuted} onToggleMute={toggleMute} />
+        </SWRConfig>
+      ) : (
+        <EnterScreen onEnter={handleEnter} />
+      )}
     </>
-  );
+  )
 }
 
-export default App;
+export default App

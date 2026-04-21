@@ -1,75 +1,61 @@
 .button-container {
   display: flex;
-  flex-flow: wrap;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin-top: 24px;
+  gap: 10px;
+  max-width: 480px;
 }
 
-button {
-  border: none;
-  font-weight: 700;
-  font-size: 16px;
-  border-radius: 24px;
+.button-container button {
   display: flex;
-  flex-direction: column;
-  outline: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 5, 0.55);
+  backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.55);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
   cursor: pointer;
-  justify-content: space-between;
-  padding: 18px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  border-radius: 2px;
+  width: auto;
+  height: auto;
+  flex-direction: row;
   text-align: left;
-  text-decoration: none;
-  width: 140px;
-  height: 140px;
 }
 
-button.github {
-  background: #6e5494;
-  color: #f1eef4;
-  background-image: url("../../../public/grid.svg");
+.button-container button:hover {
+  color: #FFD200;
+  border-color: rgba(255, 210, 0, 0.4);
+  background: rgba(255, 210, 0, 0.04);
+  box-shadow: 0 0 20px rgba(255, 210, 0, 0.08), inset 0 0 20px rgba(255, 210, 0, 0.02);
 }
 
-button.shell-ai {
-  background: #ddc9e3;
-  color: #955ca6;
-  background-image: url("../../../public/grid.svg");
+.button-container button svg {
+  width: 13px;
+  height: 13px;
+  opacity: 0.6;
+  flex-shrink: 0;
 }
 
-button.linkedin {
-  background: #b5e7fe;
-  color: #0077b5;
-  background-image: url("../../../public/grid.svg");
+.button-container button:hover svg {
+  opacity: 1;
 }
 
-button.passionfruit {
-  background: #8B5CF6;
-  color: #f3effe;
-  background-image: url("../../../public/grid.svg");
+.button-container button img {
+  width: 13px;
+  height: 13px;
+  opacity: 0.6;
+  flex-shrink: 0;
+  border-radius: 0;
+  margin-right: 0;
 }
 
-button.eyrie {
-  background: #f98b3a;
-  color: #FFF;
-  background-image: url("../../../public/grid.svg");
-}
-
-button.eyrie > img {
-  border-radius: 100%;
-  margin-right: 12px;
-}
-
-button.enql {
-  background: #191D25;
-  color: #FFF;
-  background-image: url("../../../public/grid.svg");
-}
-
-button.enql > img {
-  border-radius: 100%;
-  margin-right: 12px;
-}
-
-button > svg {
-  margin-right: 12px;
+.button-container button:hover img {
+  opacity: 1;
 }

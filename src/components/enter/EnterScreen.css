@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700&display=swap');
+
+.enter-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: pointer;
+  transition: opacity 0.75s ease, filter 0.75s ease;
+  overflow: hidden;
+}
+
+.enter-screen.leaving {
+  opacity: 0;
+  filter: blur(24px) brightness(4);
+  pointer-events: none;
+}
+
+.enter-screen__scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.07) 3px,
+    rgba(0, 0, 0, 0.07) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.enter-screen__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.85) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.enter-screen__content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  animation: screenFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  padding: 0 24px;
+}
+
+@keyframes screenFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.enter-screen__eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.45em;
+  color: #FFD200;
+  margin-bottom: 28px;
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.9; }
+  50%       { opacity: 0.3; }
+}
+
+.enter-screen__title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(28px, 9vw, 92px);
+  font-weight: 900;
+  color: #FFD200;
+  letter-spacing: 0.08em;
+  text-shadow:
+    0 0 30px rgba(255, 210, 0, 0.6),
+    0 0 80px rgba(255, 210, 0, 0.25),
+    0 0 140px rgba(255, 210, 0, 0.1);
+  position: relative;
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.enter-screen__title::before,
+.enter-screen__title::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.enter-screen__title::before {
+  color: #00d4ff;
+  animation: glitch1 5s infinite;
+  clip-path: inset(0 0 100% 0);
+}
+
+.enter-screen__title::after {
+  color: #ff2d78;
+  animation: glitch2 5s infinite;
+  clip-path: inset(100% 0 0 0);
+}
+
+@keyframes glitch1 {
+  0%, 88%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  90%  { clip-path: inset(15% 0 65% 0); transform: translate(-5px, 0); }
+  92%  { clip-path: inset(55% 0 25% 0); transform: translate(5px, 0);  }
+  94%  { clip-path: inset(35% 0 45% 0); transform: translate(-3px, 0); }
+  96%  { clip-path: inset(75% 0 5%  0); transform: translate(3px, 0);  }
+}
+
+@keyframes glitch2 {
+  0%, 88%, 100% { clip-path: inset(100% 0 0 0); transform: translate(0); }
+  90%  { clip-path: inset(45% 0 35% 0); transform: translate(5px, 0);  }
+  92%  { clip-path: inset(5%  0 75% 0); transform: translate(-5px, 0); }
+  94%  { clip-path: inset(65% 0 15% 0); transform: translate(3px, 0);  }
+  96%  { clip-path: inset(25% 0 55% 0); transform: translate(-3px, 0); }
+}
+
+.enter-screen__subtitle {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(9px, 1.8vw, 13px);
+  letter-spacing: 0.38em;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 52px;
+}
+
+.enter-screen__divider {
+  width: 56px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 210, 0, 0.7), transparent);
+  margin: 0 auto 48px;
+}
+
+.enter-screen__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  color: #FFD200;
+  animation: ctaPulse 2.2s ease-in-out infinite;
+  margin-bottom: 28px;
+  padding: 0;
+  pointer-events: none;
+}
+
+@keyframes ctaPulse {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 18px rgba(255, 210, 0, 0.9);
+  }
+  50% {
+    opacity: 0.5;
+    text-shadow: 0 0 4px rgba(255, 210, 0, 0.2);
+  }
+}
+
+.enter-screen__bracket {
+  font-size: 17px;
+  font-weight: 700;
+  opacity: 0.6;
+}
+
+.enter-screen__cta-label {
+  font-weight: 700;
+}
+
+.enter-screen__hint {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.18);
+}
