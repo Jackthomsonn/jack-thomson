@@ -1,61 +1,178 @@
-.button-container {
+/* ─── Panel wrapper ─────────────────────────────────────── */
+.social-panel {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 24px;
+  pointer-events: auto;
   max-width: 480px;
+  width: 100%;
+  animation: socialPanelIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.button-container button {
-  display: flex;
+@keyframes socialPanelIn {
+  from { opacity: 0; transform: translateY(12px); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+/* ─── Back button ───────────────────────────────────────── */
+.social-back {
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 5, 0.55);
-  backdrop-filter: blur(8px);
-  color: rgba(255, 255, 255, 0.55);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.3);
+  padding: 0;
+  transition: color 0.2s;
+  align-self: flex-start;
+}
+
+.social-back:hover { color: #FFD200; }
+
+.social-back__arrow {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.social-back:hover .social-back__arrow { transform: translateX(-3px); }
+
+/* ─── Header ────────────────────────────────────────────── */
+.social-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.social-tag {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.22em;
+  color: rgba(255,210,0,0.6);
+  white-space: nowrap;
+}
+
+.social-header__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255,210,0,0.3), transparent);
+}
+
+/* ─── Links ─────────────────────────────────────────────── */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(0, 0, 8, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s;
+  backdrop-filter: blur(8px);
   border-radius: 2px;
-  width: auto;
-  height: auto;
-  flex-direction: row;
-  text-align: left;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: linkIn 0.5s calc(0.1s + var(--i, 0) * 0.12s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.button-container button:hover {
+.social-link::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: #FFD200;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.social-link:hover::before { transform: scaleY(1); }
+
+.social-link:hover {
+  border-color: rgba(255,210,0,0.3);
+  background: rgba(255,210,0,0.04);
+  box-shadow: 0 0 30px rgba(255,210,0,0.06), inset 0 0 30px rgba(255,210,0,0.02);
+  transform: translateX(4px);
+}
+
+@keyframes linkIn {
+  from { opacity: 0; transform: translateX(-20px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateX(0);     filter: blur(0); }
+}
+
+.social-link__code {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,210,0,0.4);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.social-link:hover .social-link__code { color: #FFD200; }
+
+.social-link__icon {
+  display: flex;
+  align-items: center;
+  color: rgba(255,255,255,0.35);
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.social-link:hover .social-link__icon { color: rgba(255,255,255,0.8); }
+
+.social-pf-icon { opacity: 0.35; transition: opacity 0.2s; }
+.social-link:hover .social-pf-icon { opacity: 0.8; }
+
+.social-link__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.social-link__label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+
+.social-link:hover .social-link__label { color: rgba(255,255,255,0.9); }
+
+.social-link__sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.2);
+}
+
+.social-link__ext {
+  font-size: 13px;
+  color: rgba(255,210,0,0.2);
+  flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.social-link:hover .social-link__ext {
   color: #FFD200;
-  border-color: rgba(255, 210, 0, 0.4);
-  background: rgba(255, 210, 0, 0.04);
-  box-shadow: 0 0 20px rgba(255, 210, 0, 0.08), inset 0 0 20px rgba(255, 210, 0, 0.02);
+  transform: translate(2px, -2px);
 }
 
-.button-container button svg {
-  width: 13px;
-  height: 13px;
-  opacity: 0.6;
-  flex-shrink: 0;
-}
-
-.button-container button:hover svg {
-  opacity: 1;
-}
-
-.button-container button img {
-  width: 13px;
-  height: 13px;
-  opacity: 0.6;
-  flex-shrink: 0;
-  border-radius: 0;
-  margin-right: 0;
-}
-
-.button-container button:hover img {
-  opacity: 1;
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .social-panel { padding: 0 16px; }
 }

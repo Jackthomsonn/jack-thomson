@@ -82,8 +82,38 @@ export const Particles = () => {
       mouseRef.current.y = -(e.clientY / window.innerHeight) * 2 + 1
     }
 
+    const handleOrientation = (e: DeviceOrientationEvent) => {
+      const gamma = e.gamma ?? 0  // left/right tilt: -90 to 90
+      const beta  = e.beta  ?? 0  // front/back tilt: -180 to 180
+      mouseRef.current.x = Math.max(-1, Math.min(1, gamma / 30))
+      mouseRef.current.y = Math.max(-1, Math.min(1, -(beta - 45) / 45))
+    }
+
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
+
+    if (isMobile && typeof DeviceOrientationEvent !== 'undefined') {
+      const doe = DeviceOrientationEvent as any
+      if (typeof doe.requestPermission === 'function') {
+        // iOS 13+ requires permission — request on first touch
+        const requestOnTouch = () => {
+          doe.requestPermission().then((state: string) => {
+            if (state === 'granted') {
+              window.addEventListener('deviceorientation', handleOrientation)
+            }
+          }).catch(() => {})
+          window.removeEventListener('touchstart', requestOnTouch)
+        }
+        window.addEventListener('touchstart', requestOnTouch, { once: true })
+      } else {
+        window.addEventListener('deviceorientation', handleOrientation)
+      }
+    }
+
     window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('deviceorientation', handleOrientation)
+    }
   }, [])
 
   const { positions, sizes, colors, speeds } = useMemo(() => {

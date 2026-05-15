@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700&display=swap');
+
+/* ─── Base ─────────────────────────────────────────────── */
+.hub {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ─── Corner brackets ───────────────────────────────────── */
+.hub__corner {
+  position: fixed;
+  width: 0;
+  height: 0;
+  border-color: #FFD200;
+  border-style: solid;
+  border-width: 0;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s;
+  opacity: 0;
+}
+
+.hub--booted .hub__corner {
+  width: 44px;
+  height: 44px;
+  opacity: 1;
+}
+
+.hub__corner--tl { top: 18px; left: 18px; border-top-width: 1.5px; border-left-width: 1.5px; }
+.hub__corner--tr { top: 18px; right: 18px; border-top-width: 1.5px; border-right-width: 1.5px; }
+.hub__corner--bl { bottom: 18px; left: 18px; border-bottom-width: 1.5px; border-left-width: 1.5px; }
+.hub__corner--br { bottom: 18px; right: 18px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+/* ─── Edge status bars ──────────────────────────────────── */
+.hub__edge {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.18);
+  opacity: 0;
+  transition: opacity 0.8s 0.5s;
+  white-space: nowrap;
+}
+
+.hub--booted .hub__edge { opacity: 1; }
+
+.hub__edge--top { top: 24px; }
+.hub__edge--bottom { bottom: 24px; }
+
+.hub__edge-sep { color: rgba(255, 210, 0, 0.2); }
+
+.hub__edge-ping {
+  color: rgba(34, 211, 238, 0.5);
+  animation: edgePing 3s ease-in-out infinite;
+}
+
+@keyframes edgePing {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+/* ─── Mute button ───────────────────────────────────────── */
+.hub__mute {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.35);
+  padding: 8px 13px;
+  cursor: pointer;
+  pointer-events: auto;
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  backdrop-filter: blur(6px);
+  border-radius: 2px;
+  opacity: 0;
+  transition: color 0.2s, border-color 0.2s, opacity 0.8s 0.6s;
+}
+
+.hub--booted .hub__mute { opacity: 1; }
+
+.hub__mute:hover {
+  color: #FFD200;
+  border-color: rgba(255,210,0,0.35);
+  background: rgba(255,210,0,0.04);
+}
+
+/* ─── Viewport + screen transitions ────────────────────── */
+.hub__viewport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hub__viewport--enter {
+  animation: viewportIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hub__viewport--exit {
+  animation: viewportOut 0.38s ease-in forwards;
+  pointer-events: none;
+}
+
+@keyframes viewportIn {
+  from { opacity: 0; filter: blur(8px) brightness(2); transform: scale(0.97); }
+  to   { opacity: 1; filter: blur(0) brightness(1);   transform: scale(1); }
+}
+
+@keyframes viewportOut {
+  from { opacity: 1; filter: blur(0) brightness(1); }
+  to   { opacity: 0; filter: blur(16px) brightness(3); }
+}
+
+/* ─── Main nav layout ───────────────────────────────────── */
+.hub__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  pointer-events: auto;
+  padding: 0 24px;
+}
+
+/* ─── Identity block ────────────────────────────────────── */
+.hub__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: identityIn 0.8s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes identityIn {
+  from { opacity: 0; transform: translateY(-10px); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0);     filter: blur(0); }
+}
+
+/* ─── Reticle ───────────────────────────────────────────── */
+.hub__reticle {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin-bottom: 4px;
+}
+
+.hub__reticle-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 210, 0, 0.5);
+}
+
+.hub__reticle-ring--outer {
+  animation: spinCW 8s linear infinite;
+  border-color: rgba(255, 210, 0, 0.35);
+  border-top-color: rgba(255, 210, 0, 0.9);
+  border-right-color: transparent;
+}
+
+.hub__reticle-ring--inner {
+  inset: 12px;
+  border-color: rgba(34, 211, 238, 0.2);
+  border-top-color: rgba(34, 211, 238, 0.7);
+  animation: spinCCW 5s linear infinite;
+}
+
+@keyframes spinCW  { to { transform: rotate(360deg);  } }
+@keyframes spinCCW { to { transform: rotate(-360deg); } }
+
+.hub__reticle-crosshair--h,
+.hub__reticle-crosshair--v {
+  position: absolute;
+  background: rgba(255, 210, 0, 0.25);
+}
+
+.hub__reticle-crosshair--h {
+  top: 50%; left: 0; right: 0;
+  height: 1px; transform: translateY(-50%);
+}
+
+.hub__reticle-crosshair--v {
+  left: 50%; top: 0; bottom: 0;
+  width: 1px; transform: translateX(-50%);
+}
+
+.hub__reticle-dot {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 6px; height: 6px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: #FFD200;
+  box-shadow: 0 0 8px #FFD200, 0 0 20px rgba(255,210,0,0.6);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px #FFD200, 0 0 20px rgba(255,210,0,0.6); }
+  50%       { opacity: 0.6; box-shadow: 0 0 4px #FFD200, 0 0 10px rgba(255,210,0,0.2); }
+}
+
+/* ─── Name / title ──────────────────────────────────────── */
+.hub__eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: #22d3ee;
+  opacity: 0.7;
+}
+
+.hub__name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(22px, 5vw, 48px);
+  font-weight: 900;
+  color: #FFD200;
+  letter-spacing: 0.1em;
+  text-shadow:
+    0 0 24px rgba(255,210,0,0.55),
+    0 0 60px rgba(255,210,0,0.2);
+  position: relative;
+  line-height: 1;
+}
+
+.hub__name::before,
+.hub__name::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+.hub__name::before {
+  color: #00d4ff;
+  animation: glitch1 7s 2s infinite;
+  clip-path: inset(0 0 100% 0);
+}
+
+.hub__name::after {
+  color: #ff2d78;
+  animation: glitch2 7s 2s infinite;
+  clip-path: inset(100% 0 0 0);
+}
+
+@keyframes glitch1 {
+  0%, 90%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+  92% { clip-path: inset(20% 0 60% 0); transform: translate(-4px); }
+  94% { clip-path: inset(60% 0 20% 0); transform: translate(4px); }
+}
+
+@keyframes glitch2 {
+  0%, 90%, 100% { clip-path: inset(100% 0 0 0); transform: translate(0); }
+  92% { clip-path: inset(40% 0 40% 0); transform: translate(4px); }
+  94% { clip-path: inset(10% 0 70% 0); transform: translate(-4px); }
+}
+
+.hub__title {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(8px, 1.4vw, 11px);
+  letter-spacing: 0.36em;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ─── Divider ───────────────────────────────────────────── */
+.hub__divider {
+  width: 160px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255,210,0,0.5), transparent);
+  margin: 28px 0 24px;
+  opacity: 0;
+  animation: fadeIn 0.4s 0.6s forwards;
+}
+
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ─── Nav ───────────────────────────────────────────────── */
+.hub__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 440px;
+  pointer-events: auto;
+}
+
+.hub__nav-prompt {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 4px;
+  text-align: left;
+  opacity: 0;
+  animation: fadeIn 0.4s 0.65s forwards;
+}
+
+.hub__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(0, 0, 8, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s;
+  backdrop-filter: blur(8px);
+  border-radius: 2px;
+  width: 100%;
+  opacity: 0;
+  animation: navItemIn 0.5s calc(0.7s + var(--i, 0) * 0.13s) cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+.hub__nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: #FFD200;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hub__nav-item:hover::before { transform: scaleY(1); }
+
+.hub__nav-item:hover {
+  border-color: rgba(255, 210, 0, 0.3);
+  background: rgba(255, 210, 0, 0.04);
+  box-shadow: 0 0 30px rgba(255,210,0,0.06), inset 0 0 30px rgba(255,210,0,0.02);
+  transform: translateX(4px);
+}
+
+@keyframes navItemIn {
+  from { opacity: 0; transform: translateX(-20px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateX(0);     filter: blur(0); }
+}
+
+.hub__nav-code {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,210,0,0.45);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.hub__nav-item:hover .hub__nav-code { color: #FFD200; }
+
+.hub__nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+}
+
+.hub__nav-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(255,255,255,0.5);
+  transition: color 0.2s;
+}
+
+.hub__nav-item:hover .hub__nav-label { color: rgba(255,255,255,0.9); }
+
+.hub__nav-desc {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.2);
+}
+
+.hub__nav-arrow {
+  font-size: 10px;
+  color: rgba(255,210,0,0.2);
+  flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.hub__nav-item:hover .hub__nav-arrow {
+  color: #FFD200;
+  transform: translateX(3px);
+}
+
+/* ─── Responsive ────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .hub__corner { --s: 32px; }
+  .hub__edge { display: none; }
+  .hub__nav { max-width: 100%; }
+}

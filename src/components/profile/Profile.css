@@ -1,44 +1,206 @@
-.profile-photo {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background-image: var(--avatarUrl);
-  background-size: cover;
-  background-position: center;
-  border: 1.5px solid rgba(255, 210, 0, 0.35);
-  box-shadow:
-    0 0 0 4px rgba(255, 210, 0, 0.06),
-    0 0 24px rgba(255, 210, 0, 0.18),
-    0 0 60px rgba(255, 210, 0, 0.06);
+/* ─── Panel wrapper ─────────────────────────────────────── */
+.profile-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 24px;
+  pointer-events: auto;
+  max-width: 500px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(12px);
+  filter: blur(6px);
+  transition: opacity 0.5s, transform 0.5s, filter 0.5s;
 }
 
-.profile-name {
-  font-family: 'Orbitron', monospace;
-  font-size: clamp(20px, 4vw, 30px);
-  font-weight: 700;
-  color: #FFD200;
-  letter-spacing: 0.1em;
-  text-shadow: 0 0 24px rgba(255, 210, 0, 0.45);
-  text-align: center;
+.profile-panel--ready {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
 }
 
-.profile-bio {
+/* ─── Back button ───────────────────────────────────────── */
+.profile-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
   font-family: 'Space Mono', monospace;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.9;
-  max-width: 420px;
-  text-align: center;
-  letter-spacing: 0.04em;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.3);
+  padding: 0;
+  transition: color 0.2s;
+  align-self: flex-start;
 }
 
-.profile-bio a {
+.profile-back:hover { color: #FFD200; }
+
+.profile-back__arrow {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.profile-back:hover .profile-back__arrow { transform: translateX(-3px); }
+
+/* ─── Header ────────────────────────────────────────────── */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255,210,0,0.6);
+  white-space: nowrap;
+}
+
+.profile-header__line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255,210,0,0.3), transparent);
+}
+
+/* ─── Body ──────────────────────────────────────────────── */
+.profile-body {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+/* ─── Photo ─────────────────────────────────────────────── */
+.profile-photo-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+}
+
+.profile-photo {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 1.5px solid rgba(255,210,0,0.4);
+  box-shadow: 0 0 24px rgba(255,210,0,0.15), 0 0 60px rgba(255,210,0,0.06);
+}
+
+.profile-photo-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,210,0,0.15);
+  animation: profileRingSpin 12s linear infinite;
+}
+
+@keyframes profileRingSpin { to { transform: rotate(360deg); } }
+
+.profile-photo-ring::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #FFD200;
+  box-shadow: 0 0 8px #FFD200;
+}
+
+.profile-photo-scan {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.profile-photo-scan::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgba(34,211,238,0.12), transparent);
+  animation: scanLine 2.5s ease-in-out infinite;
+}
+
+@keyframes scanLine {
+  0%   { top: -40%; }
+  100% { top: 140%; }
+}
+
+/* ─── Info rows ─────────────────────────────────────────── */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.profile-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.profile-key {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: rgba(255,210,0,0.5);
+  min-width: 44px;
+  flex-shrink: 0;
+}
+
+.profile-val {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.06em;
+}
+
+.profile-val a {
   color: #FFD200;
   text-decoration: none;
   opacity: 0.8;
   transition: opacity 0.2s;
 }
 
-.profile-bio a:hover {
-  opacity: 1;
+.profile-val a:hover { opacity: 1; }
+
+/* ─── Bio ───────────────────────────────────────────────── */
+.profile-bio-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-bio-divider {
+  height: 1px;
+  background: linear-gradient(to right, rgba(255,210,0,0.2), transparent);
+}
+
+.profile-bio {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Mobile ────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .profile-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-info { align-items: center; }
+  .profile-row  { justify-content: center; }
+  .profile-bio  { text-align: center; }
 }
