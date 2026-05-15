@@ -71,7 +71,12 @@ export const Social = ({ onBack, playHoverSound }: SocialProps) => {
               <span className="social-link__label">{link.label}</span>
               <span className="social-link__sub">{link.sublabel}</span>
             </div>
-            <span className="social-link__ext">↗</span>
+            <span className="social-link__ext">
+              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="1.5" y1="9.5" x2="9.5" y2="1.5" />
+                <polyline points="3.5,1.5 9.5,1.5 9.5,7.5" />
+              </svg>
+            </span>
           </a>
         ))}
       </div>

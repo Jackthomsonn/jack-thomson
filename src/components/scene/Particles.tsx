@@ -91,19 +91,20 @@ export const Particles = () => {
 
     const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)
 
+    let requestOnInteraction: (() => void) | null = null
+
     if (isMobile && typeof DeviceOrientationEvent !== 'undefined') {
       const doe = DeviceOrientationEvent as any
       if (typeof doe.requestPermission === 'function') {
-        // iOS 13+ requires permission — request on first touch
-        const requestOnTouch = () => {
+        // iOS 13+ requires permission — request on first touchend (more reliable than touchstart)
+        requestOnInteraction = () => {
           doe.requestPermission().then((state: string) => {
             if (state === 'granted') {
               window.addEventListener('deviceorientation', handleOrientation)
             }
           }).catch(() => {})
-          window.removeEventListener('touchstart', requestOnTouch)
         }
-        window.addEventListener('touchstart', requestOnTouch, { once: true })
+        window.addEventListener('touchend', requestOnInteraction, { once: true })
       } else {
         window.addEventListener('deviceorientation', handleOrientation)
       }
@@ -113,6 +114,9 @@ export const Particles = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('deviceorientation', handleOrientation)
+      if (requestOnInteraction) {
+        window.removeEventListener('touchend', requestOnInteraction)
+      }
     }
   }, [])
 
